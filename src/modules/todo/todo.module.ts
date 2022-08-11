@@ -1,5 +1,5 @@
 import { TodoService } from './todo.service';
-import { TodoController } from './todo.controller';
+import { TodoResolver } from './todo.resolver';
 import { Module } from '@nestjs/common';
 import { TodoItemSchema } from './todo.schema';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -8,11 +8,12 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'Todo',
+        name: 'todo',
         schema: TodoItemSchema,
       },
     ]),
   ],
-  controllers: [TodoController],
+  providers: [TodoResolver, TodoService],
+  exports: [TodoService],
 })
 export class TodoModule {}

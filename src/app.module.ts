@@ -6,15 +6,18 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
 import { TodoModule } from './modules/todo/todo.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017', {
+    ScheduleModule.forRoot(),
+    MongooseModule.forRoot('mongodb://localhost:27017/test', {
       connectTimeoutMS: 10000,
       keepAlive: true,
       keepAliveInitialDelay: 300000,
       retryAttempts: 10,
       retryDelay: 5000,
+      family: 4,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

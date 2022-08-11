@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-@ObjectType({ description: 'todoItem' })
+@ObjectType({ description: 'todoModel' })
 export class TodoModel {
   @Field(() => ID)
   _id: string;
