@@ -7,10 +7,13 @@ export enum TodoStatus {
 }
 
 @InputType()
-export class AddTodoDto {
+export class TodoOprDto {
   @Field()
-  name: string;
+  id: string;
 
-  @Field()
-  status: TodoStatus;
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  status?: TodoStatus;
 }

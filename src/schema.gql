@@ -5,8 +5,8 @@
 """todoModel"""
 type TodoModel {
   _id: ID!
-  name: String!
-  status: String!
+  name: String
+  status: String
   createAt: DateTime!
   updateAt: DateTime!
 }
@@ -21,10 +21,13 @@ type Query {
 }
 
 type Mutation {
-  addTodo(todoItem: AddTodoDto!): TodoModel!
+  addTodo(todoItem: TodoOprDto!): TodoModel!
+  updateTodo(todoItem: TodoOprDto!): TodoModel!
+  deleteTodo(id: String!): TodoModel!
 }
 
-input AddTodoDto {
-  name: String!
-  status: String!
+input TodoOprDto {
+  id: String!
+  name: String
+  status: String
 }

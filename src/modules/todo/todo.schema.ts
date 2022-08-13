@@ -4,10 +4,10 @@ import { TodoStatus } from './todo.dto';
 
 @Schema({ timestamps: true })
 export class TodoItem {
-  @Prop({ required: true })
+  @Prop()
   name: string;
 
-  @Prop({ required: true, enum: TodoStatus })
+  @Prop({ enum: TodoStatus })
   status: TodoStatus;
 }
 

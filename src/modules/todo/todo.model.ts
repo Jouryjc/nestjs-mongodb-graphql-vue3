@@ -6,10 +6,10 @@ export class TodoModel {
   @Field(() => ID)
   _id: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   status: TodoStatus;
 
   @Field()
