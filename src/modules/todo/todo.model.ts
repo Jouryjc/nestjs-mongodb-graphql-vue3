@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { TodoStatus } from './todo.dto';
 
 @ObjectType({ description: 'todoModel' })
 export class TodoModel {
@@ -9,7 +10,7 @@ export class TodoModel {
   name: string;
 
   @Field()
-  status: string;
+  status: TodoStatus;
 
   @Field()
   createAt: Date;

@@ -19,3 +19,12 @@ scalar DateTime
 type Query {
   getTodoList: [TodoModel!]!
 }
+
+type Mutation {
+  addTodo(todoItem: AddTodoDto!): TodoModel!
+}
+
+input AddTodoDto {
+  name: String!
+  status: String!
+}
