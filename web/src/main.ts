@@ -1,8 +1,10 @@
 import { createApp } from 'vue';
 import './style.css';
-import '@coreui/coreui/dist/css/coreui.min.css';
+import '@idux/cdk/index.css';
+import '@idux/components/default.css';
 import App from './App.vue';
 import { router } from './router/index';
-import Component from '@coreui/vue';
+import IduxCdk from '@idux/cdk';
+import IduxComponents from '@idux/components';
 
-createApp(App).use(Component).use(router).mount('#app');
+createApp(App).use(IduxComponents).use(IduxCdk).use(router).mount('#app');

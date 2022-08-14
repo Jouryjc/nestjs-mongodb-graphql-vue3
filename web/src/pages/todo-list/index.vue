@@ -1,44 +1,68 @@
 import { useQuery } from '@vue/apollo-composable';
 <template>
-  <section class="todo-list-container">
-    <CCard style="width: 18rem" v-for="(item, index) of list" :key="item._id">
-      <CCardImage rounded orientation="top" :src="vueImg" />
-      <CCardBody>
-        <CCardTitle>{{ item.name }}</CCardTitle>
-        <CCardText>Some quick example text to build on the card title and make up the bulk of the card's content.
-        </CCardText>
-        <CButton color="link" @click="editItem(item)">编辑</CButton>
-        <CButton color="link" @click="deleteItem(item)">删除</CButton>
-      </CCardBody>
-    </CCard>
-  </section>
+  <IxSpace>
+    <IxButton @click="refetch">刷新</IxButton>
+    <IxButton @click="openTodoModal">添加</IxButton>
+  </IxSpace>
+  <IxTable row :columns="columns" :dataSource="data">
+    <template #name="{ value }">
+      <span>{{ value || '-' }}</span>
+    </template>
+    <template #status="{ value }">
+    </template>
+    <template #action="{ record }">
+      <IxSpace>
+        <IxButton mode="primary" @click="updateTodo(record)">编辑</IxButton>
+        <IxButton danger mode="primary" @click="deleteTodo(record)">删除</IxButton>
+      </IxSpace>
+    </template>
+  </IxTable>
+  <IxModal v-model:visible="visible" header="创建待办事项" :onOk="submitTodo">
+    <InputTodoForm ref="formRef" />
+  </IxModal>
 </template>
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable'
-import { computed } from 'vue';
+import { computed, h } from 'vue';
 import { todoListGql } from '../../graphql/todo.gql'
-import vueImg from './vue.jpeg'
+import { IxTag, TableColumn } from '@idux/components';
+import { useTodoModal, updateTodo, deleteTodo } from './hooks/index'
+import InputTodoForm from './components/InputTodoForm.vue';
+import type { TableRow } from './type'
 
-const { result, error, refetch } = useQuery(todoListGql)
-const list = computed(() => result.value?.getTodoList)
+const { result, refetch } = useQuery(todoListGql)
+const data = computed(() => result.value?.getTodoList)
+const columns: TableColumn<TableRow>[] = [
+  {
+    title: '任务事项',
+    dataKey: 'name',
+  },
+  {
+    title: '状态',
+    dataKey: 'status',
+    customCell: ({ value }) => {
+      return h(IxTag, {
+        color: getStatusBadge(value)
+      }, {
+        default: () => value
+      })
+    }
+  },
+  {
+    title: '操作',
+    key: 'action',
+    customCell: 'action'
+  }
+]
 
-const getStatusBadge = (status: string) => {
+const getStatusBadge = (status: TableRow['status']) => {
   return {
-    pending: 'dark',
+    pending: 'orange',
     finished: 'success',
     doing: 'info'
   }[status]
 }
+
+const { visible, formRef, openTodoModal, submitTodo } = useTodoModal()
 </script>
-
-<style lang="less" scoped>
-.todo-list-container {
-  display: flex;
-  flex-direction: row;
-
-  .card {
-    margin-left: 8px;
-  }
-}
-</style>

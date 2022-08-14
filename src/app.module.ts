@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
 import { TodoModule } from './modules/todo/todo.module';
@@ -28,7 +27,6 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     TodoModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
