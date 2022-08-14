@@ -27,7 +27,7 @@ type Mutation {
 }
 
 input TodoOprDto {
-  id: String!
+  id: String
   name: String
   status: String
 }

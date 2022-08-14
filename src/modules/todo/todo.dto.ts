@@ -8,7 +8,7 @@ export enum TodoStatus {
 
 @InputType()
 export class TodoOprDto {
-  @Field()
+  @Field({ nullable: true })
   id: string;
 
   @Field({ nullable: true })
