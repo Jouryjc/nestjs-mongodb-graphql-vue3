@@ -7,8 +7,10 @@ provide(DefaultApolloClient, apolloClient)
 </script>
 
 <template>
-  <IxModalProvider>
-    <router-view />
-  </IxModalProvider>
+  <IxNotificationProvider>
+    <IxModalProvider>
+      <router-view />
+    </IxModalProvider>
+  </IxNotificationProvider>
 </template>
 

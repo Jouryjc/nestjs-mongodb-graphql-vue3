@@ -18,3 +18,21 @@ export const todoListGql = gql`
     }
   }
 `;
+
+export const deleteTodoGql = gql`
+  mutation deleteTodo($id: String!) {
+    deleteTodo(id: $id) {
+      _id
+    }
+  }
+`;
+
+export const updateTodoGql = gql`
+  mutation updateTodo($todoItem: TodoOprDto!) {
+    updateTodo(todoItem: $todoItem) {
+      _id
+      name
+      status
+    }
+  }
+`;

@@ -9,7 +9,6 @@ export class TodoResolver {
 
   @Query(() => [TodoModel])
   async getTodoList() {
-    console.log('query todo list');
     return await this.todoService.findAll();
   }
 

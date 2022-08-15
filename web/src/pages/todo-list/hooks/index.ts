@@ -36,7 +36,3 @@ export const useTodoModal = () => {
     openTodoModal,
   };
 };
-
-export const deleteTodo = (record: TableRow) => {};
-
-export const updateTodo = (record: TableRow) => {};
