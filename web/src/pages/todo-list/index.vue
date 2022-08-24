@@ -21,10 +21,9 @@ import { useQuery } from '@vue/apollo-composable';
 
 <script setup lang="ts">
 import { useMutation, useQuery } from '@vue/apollo-composable'
-import { computed, h } from 'vue';
+import { computed, h, ref } from 'vue';
 import { addTodo, todoListGql, deleteTodoGql, updateTodoGql } from '../../graphql/todo.gql'
 import { IxTag, TableColumn, useModal, useNotification } from '@idux/components';
-import { useTodoModal } from './hooks/index'
 import InputTodoForm from './components/InputTodoForm.vue';
 import type { TableRow } from './type'
 const { success, error } = useNotification()
@@ -62,7 +61,7 @@ const getStatusBadge = (status: TableRow['status']) => {
   }[status]
 }
 const { mutate } = useMutation(addTodo);
-const { formRef } = useTodoModal()
+const formRef = ref<typeof InputTodoForm>();
 const { open, confirm } = useModal()
 const openTodoModal = () => {
   open({
