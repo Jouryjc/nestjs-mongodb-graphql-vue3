@@ -26,6 +26,7 @@ import { addTodo, todoListGql, deleteTodoGql, updateTodoGql } from '../../graphq
 import { IxTag, TableColumn, useModal, useNotification } from '@idux/components';
 import InputTodoForm from './components/InputTodoForm.vue';
 import type { TableRow } from './type'
+import { taskStatusText } from './const';
 const { success, error } = useNotification()
 
 const { result, refetch } = useQuery(todoListGql)
@@ -39,10 +40,13 @@ const columns: TableColumn<TableRow>[] = [
     title: '状态',
     dataKey: 'status',
     customCell: ({ value }) => {
+      const taskText = {
+        
+      }
       return h(IxTag, {
         color: getStatusBadge(value)
       }, {
-        default: () => value
+        default: () => taskStatusText[value]
       })
     }
   },
@@ -83,6 +87,12 @@ const openTodoModal = () => {
           status: 'pending',
         },
       });
+
+      success({
+        title: '成功',
+        content: '创建任务成功！'
+      })
+      refetch()
     },
   })
 }

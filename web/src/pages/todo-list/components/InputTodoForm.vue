@@ -3,8 +3,8 @@
     <IxFormItem label="任务名称" required>
       <IxInput control="name" />
     </IxFormItem>
-    <IxFormItem v-if="showStatusSelect" label="任务状态" required>
-      <IxSelect :dataSource="dataSource" control="status" />
+    <IxFormItem v-if="showStatusSelect" label="任务状态" required class="status-select-form-item">
+      <IxSelect  :dataSource="dataSource" control="status" />
     </IxFormItem>
   </IxForm>
 </template>
@@ -13,6 +13,7 @@
 import { useFormGroup, Validators } from '@idux/cdk/forms';
 import { SelectData } from '@idux/components';
 import { computed, onMounted, PropType } from 'vue';
+import { taskStatusText } from '../const';
 import { TableRow } from '../type';
 
 const props = defineProps({
@@ -20,9 +21,9 @@ const props = defineProps({
 })
 
 const dataSource: SelectData[] = [
-  { key: 'pending', label: 'pending' },
-  { key: 'doing', label: 'doing' },
-  { key: 'finished', label: 'finished' },
+  { key: 'pending', label: taskStatusText.pending },
+  { key: 'doing', label: taskStatusText.doing },
+  { key: 'finished', label: taskStatusText.finished },
 ]
 const { required } = Validators
 const formGroup = useFormGroup({
@@ -46,4 +47,7 @@ defineExpose({
 </script>
 
 <style lang="less" scoped>
+.status-select-form-item {
+  width: 446px;
+}
 </style>
