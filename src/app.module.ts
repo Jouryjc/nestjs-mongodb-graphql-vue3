@@ -6,11 +6,12 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { TodoModule } from './modules/todo/todo.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { MONGO_SERVER } from './config'
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost:27017/test', {
+    MongooseModule.forRoot(MONGO_SERVER, {
       connectTimeoutMS: 10000,
       keepAlive: true,
       keepAliveInitialDelay: 300000,
