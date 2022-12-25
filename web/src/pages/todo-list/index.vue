@@ -1,7 +1,7 @@
 import { useQuery } from '@vue/apollo-composable';
 <template>
   <IxSpace>
-    <IxButton @click="refetch">刷新</IxButton>
+    <IxButton @click="refetch()">刷新</IxButton>
     <IxButton @click="openTodoModal">添加</IxButton>
   </IxSpace>
   <IxTable row :columns="columns" :dataSource="data">
