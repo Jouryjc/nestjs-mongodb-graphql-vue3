@@ -1,0 +1,38 @@
+version: '3.0'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - backend
+  server:
+    image: jouryjc/demo-server:latest
+    container_name: backend-server
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: "mongodb://10.211.55.15:27017/"
+      SERVER_PORT: 3000
+    depends_on:
+      - mongo
+    networks:
+      - backend
+  web:
+    image: jouryjc/demo-web
+    container_name: web
+    volumes:
+      - ./nginx_conf/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+
+networks:
+ frontend:
+ backend:
