@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { join } from 'path';
 import { TodoModule } from './modules/todo/todo.module';
 import { ScheduleModule } from '@nestjs/schedule';
-import { MONGO_SERVER } from './config'
+import { MONGO_SERVER } from './config';
 
 @Module({
   imports: [

@@ -62,7 +62,7 @@ systemctl enable docker
 systemctl enable kubelet
 
 # master 节点运行
-# kubeadm init --image-repository registry.aliyuncs.com/google_containers --apiserver-advertise-address=192.168.205.120 --kubernetes-version=v1.19.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.1.0.0/16
+# kubeadm init --image-repository registry.aliyuncs.com/google_containers --apiserver-advertise-address=192.168.33.10 --kubernetes-version=v1.19.3 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.1.0.0/16
 
 # mkdir -p $HOME/.kube
 # sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -74,6 +74,7 @@ systemctl enable kubelet
 # kubectl apply -f kube-flannel.yaml
 
 # node 节点运行
+# kubeadm token create --print-join-command
 # kubeadm join
 
 # echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bash_profile
