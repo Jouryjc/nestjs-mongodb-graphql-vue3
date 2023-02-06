@@ -1,4 +1,3 @@
-import { useQuery } from '@vue/apollo-composable';
 <template>
   <IxSpace>
     <IxButton @click="refetch()">刷新</IxButton>
@@ -27,6 +26,7 @@ import { IxTag, TableColumn, useModal, useNotification } from '@idux/components'
 import InputTodoForm from './components/InputTodoForm.vue';
 import type { TableRow } from './type'
 import { taskStatusText } from './const';
+import type { ITaskStatusText } from './const';
 const { success, error } = useNotification()
 
 const { result, refetch } = useQuery(todoListGql)
@@ -46,7 +46,7 @@ const columns: TableColumn<TableRow>[] = [
       return h(IxTag, {
         color: getStatusBadge(value)
       }, {
-        default: () => taskStatusText[value]
+        default: () => taskStatusText[value as ITaskStatusText]
       })
     }
   },

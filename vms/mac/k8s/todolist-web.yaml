@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: todolist-web
+  labels:
+    name: todolist-web
+spec:
+  containers:
+  - name: todolist-web
+    image: jouryjc/todolist-web
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
