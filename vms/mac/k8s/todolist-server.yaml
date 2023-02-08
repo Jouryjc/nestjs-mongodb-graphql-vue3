@@ -1,0 +1,62 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: todolist-server-configmap
+  namespace: default
+data:
+  SERVER_PORT: "3000"
+  MONGO_URI: "mongodb://192.168.33.10:30003/"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todolist-server-service
+  namespace: default
+spec:
+  selector:
+    app: todolist-server
+  type: NodePort
+  ports:
+  - name: todolist-server-service
+    protocol: TCP
+    port: 3000
+    targetPort: 3000
+    # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+    # you can specify a value in the `spec.ports[*].nodePort` field.
+    nodePort: 30004
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  todolist-server
+  namespace: default
+  labels:
+    app: todolist-server
+spec:
+  selector:
+    matchLabels:
+      app: todolist-server
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: todolist-server
+    spec:
+      containers:
+      - name:  todolist-server
+        image:  jouryjc/todolist-server:latest
+        ports:
+        - containerPort: 3000
+          name:  todolist-server
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            configMapKeyRef:
+              name: todolist-server-configmap
+              key: MONGO_URI
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: todolist-server-configmap
+              key: SERVER_PORT
+      restartPolicy: Always
