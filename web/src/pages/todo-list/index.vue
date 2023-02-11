@@ -154,7 +154,7 @@ const updateTodo = (record: TableRow) => {
         })
         refetch()
       } catch {
-        fail({
+        error({
           title: '失败',
           content: '编辑失败！'
         })
