@@ -20,4 +20,4 @@ spec:
   volumes:
     - name: nginx-conf
       hostPath:
-        path: /home/demo/nginx-default.conf
+        path: /home/nginx-default.conf
