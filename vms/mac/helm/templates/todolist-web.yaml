@@ -19,5 +19,5 @@ spec:
       - containerPort: 80
   volumes:
     - name: nginx-conf
-      hostPath:
-        path: /home/nginx-default.conf
+      configMap:
+        name: todolist-web-configmap
