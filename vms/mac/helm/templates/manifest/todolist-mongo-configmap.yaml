@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: todolist-mongo-configmap
+  namespace: default
+data:
+  mongodb.conf: |
+    dbpath=/data/todolist-data/mongodb
+    logpath=/data/todolist-data/mongodb/mongodb.log
+    logappend=true
+    bind_ip=0.0.0.0
+    port=27017
+    auth=true

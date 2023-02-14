@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todolist-mongo-service
+  labels:
+    name: todolist-mongo-service
+  namespace: default
+spec:
+  selector:
+    name: todolist-mongo-statefulset
+  type: NodePort
+  ports:
+  - name: todolist-mongo-service
+    protocol: TCP
+    port: 27017
+    targetPort: 27017
+    # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+    # you can specify a value in the `spec.ports[*].nodePort` field.
+    nodePort: 30003

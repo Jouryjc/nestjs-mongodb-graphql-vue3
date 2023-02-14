@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todolist-mongo-statefulset
+  namespace: default
+  labels:
+    name: todolist-mongo-statefulset
+spec:
+  selector:
+    matchLabels:
+      name: todolist-mongo-statefulset # has to match .spec.template.metadata.labels
+  serviceName: "todolist-mongo-service"
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        name: todolist-mongo-statefulset # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: todolist-mongo-statefulset-mongodb
+        image: mongo
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: todolist-mongo-secret
+                key: mongo-root-username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: todolist-mongo-secret
+                key: mongo-root-password
+        command:
+          - sh
+          - -c
+          - "exec mongod -f /data/todolist-data/mongodb/conf/mongodb.conf"
+        ports:
+        - containerPort: 27017
+          name: mongodb
+          protocol: TCP
+        volumeMounts:
+        - name: todolist-mongo-configmap
+          mountPath: /data/todolist-data/mongodb/conf/
+        - name: data
+          mountPath: /data/todolist-data/mongodb/
+      volumes:
+        - name: todolist-mongo-configmap
+          configMap:
+            name: todolist-mongo-configmap
+        - name: data
+          hostPath:
+            path: /data/todolist-data/mongodb/
+  
