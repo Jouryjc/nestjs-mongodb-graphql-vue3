@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
       - name:  todolist-server
-        image:  jouryjc/todolist-server:latest
+        image:  "jouryjc/todolist-server:{{ .Values.server.tag }}"
         ports:
         - containerPort: 3000
           name:  todolist-server

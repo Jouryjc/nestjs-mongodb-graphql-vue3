@@ -32,3 +32,16 @@ jobs:
           context: web
           push: true
           tags: ${{ env.DOCKERHUB_USERNAME }}/todolist-web:${{ steps.vars.outputs.sha_short }}
+      - name: Update helm values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'vms/mac/helm/values.yaml'
+          commitChange: true
+          branch: master
+          updateFile: true
+          message: 'Update Web and Server Image Version to ${{ steps.vars.outputs.sha_short }}'
+          changes: |
+            {
+              "web.tag": "${{ steps.vars.outputs.sha_short }}",
+              "server.tag": "${{ steps.vars.outputs.sha_short }}"
+            }
