@@ -35,7 +35,7 @@ jobs:
       - name: Update helm values.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
-          valueFile: 'vms/mac/helm/values.yaml'
+          valueFile: 'vms/helm/values.yaml'
           commitChange: true
           branch: master
           updateFile: true
