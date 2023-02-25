@@ -30,10 +30,10 @@ spec:
               secretKeyRef:
                 name: todolist-mongo-secret
                 key: mongo-root-password
-        command:
-          - sh
-          - -c
-          - "exec mongod -f /data/todolist-data/mongodb/conf/mongodb.conf"
+        # command:
+        #   - sh
+        #   - -c
+        #   - "exec mongod -f /data/todolist-data/mongodb/conf/mongodb.conf"
         ports:
         - containerPort: 27017
           name: mongodb
