@@ -1,0 +1,1 @@
+{"version":3,"file":"micro.module.js","sourceRoot":"","sources":["../../../src/modules/micro-client/micro.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,6DAAyD;AAQzD,IAAa,WAAW,GAAxB,MAAa,WAAW;CAAG,CAAA;AAAd,WAAW;IANvB,IAAA,eAAM,EAAC;QACN,OAAO,EAAE,EAAE;QACX,WAAW,EAAE,CAAC,kCAAe,CAAC;QAC9B,SAAS,EAAE,EAAE;KAEd,CAAC;GACW,WAAW,CAAG;AAAd,kCAAW"}
