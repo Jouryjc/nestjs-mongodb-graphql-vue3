@@ -28,7 +28,7 @@ services:
       - default
 
   web:
-    image: jouryjc/demo-web
+    image: jouryjc/demo-web:latest
     container_name: web
     volumes:
       - ./nginx_conf/default.conf:/etc/nginx/conf.d/default.conf

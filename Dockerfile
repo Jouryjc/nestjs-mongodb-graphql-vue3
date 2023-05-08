@@ -1,13 +1,11 @@
 # 第一步先安装依赖和构建
-FROM node:latest AS builder
+FROM jouryjc/node_pnpm_yarn_ni:latest AS builder
 LABEL maintainer="xiaoyu"
 COPY . .
 
 # Nodejs进程不能被终止的解决办法
 # RUN apt-get update && apt-get install -y dumb-init
-RUN npm install -g pnpm
 
-RUN pnpm -v
 RUN pnpm install
 RUN pnpm run build
 
