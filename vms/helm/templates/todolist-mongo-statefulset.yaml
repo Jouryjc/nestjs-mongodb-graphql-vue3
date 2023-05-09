@@ -48,6 +48,6 @@ spec:
           configMap:
             name: todolist-mongo-configmap
         - name: data
-          hostPath:
-            path: /data/todolist-data/mongodb/
+          persistentVolumeClaim:
+            claimName: todolist-mongo-pvc
   

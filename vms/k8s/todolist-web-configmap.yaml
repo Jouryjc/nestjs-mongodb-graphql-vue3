@@ -12,7 +12,7 @@ data:
 
       #access_log  /var/log/nginx/host.access.log  main;
       location /graphql {
-        proxy_pass http://192.168.33.10:30004/graphql;
+        proxy_pass http://todolist-server-service.default.svc.cluster.local:3000/graphql;
       }
       
       location / {

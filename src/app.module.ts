@@ -13,8 +13,8 @@ import { MONGO_SERVER } from './config';
     ScheduleModule.forRoot(),
     MongooseModule.forRoot(MONGO_SERVER, {
       connectTimeoutMS: 10000,
-      user: 'root',
-      pass: 'root',
+      user: '',
+      pass: '',
       dbName: 'demo',
       autoCreate: true,
       keepAlive: true,

@@ -18,18 +18,20 @@ spec:
     spec:
       containers:
       - name: todolist-mongo-statefulset-mongodb
-        image: mongo
+        image: mongo:latest
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: todolist-mongo-secret
-                key: mongo-root-username
+            value: root
+            # valueFrom:
+            #   secretKeyRef:
+            #     name: todolist-mongo-secret
+            #     key: mongo-root-username
           - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: todolist-mongo-secret
-                key: mongo-root-password
+            value: root
+            # valueFrom:
+            #   secretKeyRef:
+            #     name: todolist-mongo-secret
+            #     key: mongo-root-password
         command:
           - sh
           - -c
@@ -48,6 +50,6 @@ spec:
           configMap:
             name: todolist-mongo-configmap
         - name: data
-          hostPath:
-            path: /data/todolist-data/mongodb/
+          persistentVolumeClaim:
+            claimName: todolist-mongo-pvc
   
