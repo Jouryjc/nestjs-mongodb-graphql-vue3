@@ -6,6 +6,8 @@ import { SERVER_PORT } from './config'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  console.log('111')
+
   const options = new DocumentBuilder()
     .setTitle('TodoList API')
     .setDescription('This is todo list api document')
